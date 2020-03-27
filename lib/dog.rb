@@ -31,8 +31,10 @@ class Dog
   end 
   
   def save
-    sql = "INSERT INTO dogs (name, breed) VALUES (?, ?)"
-    @id = DB[:conn].execute(sql, self.name, self.breed)[0]
+    insert_sql = "INSERT INTO dogs (name, breed) VALUES (?, ?)"
+    select_sql = "SELECT id FROM dogs WHERE name = ? AND breed = ?"
+    #@id = DB[:conn].execute(insert_sql, self.name, self.breed)[0]
+    @id = DB[:conn].execute(select_sql, self.name, self.breed)[0]
     self
   end 
   
@@ -55,7 +57,7 @@ class Dog
   end 
   
   def self.find_or_create_by(name:, breed:)
-    binding.pry 
+    #binding.pry 
     sql = "SELECT * FROM dogs WHERE name = ? AND breed = ?"
     row = DB[:conn].execute(sql, name, breed)[0]
     params = {:name => name, :breed => breed}

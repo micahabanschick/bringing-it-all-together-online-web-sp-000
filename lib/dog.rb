@@ -33,7 +33,7 @@ class Dog
   def save
     insert_sql = "INSERT INTO dogs (name, breed) VALUES (?, ?)"
     select_sql = "SELECT id FROM dogs WHERE name = ? AND breed = ?"
-    #@id = DB[:conn].execute(insert_sql, self.name, self.breed)[0]
+    @id = DB[:conn].execute(insert_sql, self.name, self.breed)[0]
     @id = DB[:conn].execute(select_sql, self.name, self.breed)[0]
     self
   end 

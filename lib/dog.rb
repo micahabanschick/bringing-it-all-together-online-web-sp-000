@@ -61,7 +61,7 @@ class Dog
     sql = "SELECT * FROM dogs WHERE name = ? AND breed = ?"
     row = DB[:conn].execute(sql, name, breed)[0]
     params = {:name => name, :breed => breed}
-    row.any?{|data| data == nil} ? self.find_by_id(row[0]) : self.create(params)
+    row.any?{|data| data == nil} ? self.find_by_id(row[0]).save : self.create(params)
   end 
   
   def self.find_by_name
